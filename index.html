@@ -3,101 +3,140 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Simple Calculator</title>
+  <title>Komal Yadav calculator</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #dbe6f6, #c5796d);
+      height: 100vh;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      flex-direction: column;
+      user-select: none;
     }
+
+    .branding {
+      font-size: 2em;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    .rotate-wrapper {
+      perspective: 1000px;
+    }
+
     .calculator {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 300px;
+      width: 320px;
+      background: #1e1e1e;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.5);
+      transform-style: preserve-3d;
+      transition: transform 0.1s ease;
     }
+
     .display {
       width: 100%;
       height: 60px;
-      background: #222;
-      color: #fff;
+      background: #333;
+      color: #0f0;
       font-size: 2em;
       text-align: right;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      box-sizing: border-box;
+      padding: 10px 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: inset -3px -3px 5px rgba(255,255,255,0.05),
+                  inset 3px 3px 5px rgba(0,0,0,0.6);
     }
+
     .buttons {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
+      gap: 15px;
     }
+
     button {
       padding: 20px;
       font-size: 1.2em;
       border: none;
-      border-radius: 8px;
-      background: #e0e0e0;
+      border-radius: 12px;
+      background: #2e2e2e;
+      color: #fff;
+      box-shadow: 4px 4px 10px #111, -4px -4px 10px #444;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.2s ease;
     }
+
     button:hover {
-      background: #d0d0d0;
+      background: #444;
     }
+
     .operator {
-      background: #ff9800;
-      color: white;
+      background: #f57c00;
     }
+
     .operator:hover {
       background: #fb8c00;
     }
+
     .equal {
-      background: #4caf50;
-      color: white;
+      background: #388e3c;
     }
+
     .equal:hover {
       background: #43a047;
+    }
+
+    .clear {
+      background: #c62828;
+    }
+
+    .clear:hover {
+      background: #e53935;
     }
   </style>
 </head>
 <body>
-  <div class="calculator">
-    <div id="display" class="display">0</div>
-    <div class="buttons">
-      <button onclick="clearDisplay()">C</button>
-      <button onclick="appendValue('(')">(</button>
-      <button onclick="appendValue(')')">)</button>
-      <button class="operator" onclick="appendValue('/')">÷</button>
+  <div class="branding">KOMAL YADAV</div>
+  <div class="rotate-wrapper">
+    <div class="calculator" id="calculator">
+      <div id="display" class="display">0</div>
+      <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button onclick="appendValue('(')">(</button>
+        <button onclick="appendValue(')')">)</button>
+        <button class="operator" onclick="appendValue('/')">÷</button>
 
-      <button onclick="appendValue('7')">7</button>
-      <button onclick="appendValue('8')">8</button>
-      <button onclick="appendValue('9')">9</button>
-      <button class="operator" onclick="appendValue('*')">×</button>
+        <button onclick="appendValue('7')">7</button>
+        <button onclick="appendValue('8')">8</button>
+        <button onclick="appendValue('9')">9</button>
+        <button class="operator" onclick="appendValue('*')">×</button>
 
-      <button onclick="appendValue('4')">4</button>
-      <button onclick="appendValue('5')">5</button>
-      <button onclick="appendValue('6')">6</button>
-      <button class="operator" onclick="appendValue('-')">−</button>
+        <button onclick="appendValue('4')">4</button>
+        <button onclick="appendValue('5')">5</button>
+        <button onclick="appendValue('6')">6</button>
+        <button class="operator" onclick="appendValue('-')">−</button>
 
-      <button onclick="appendValue('1')">1</button>
-      <button onclick="appendValue('2')">2</button>
-      <button onclick="appendValue('3')">3</button>
-      <button class="operator" onclick="appendValue('+')">+</button>
+        <button onclick="appendValue('1')">1</button>
+        <button onclick="appendValue('2')">2</button>
+        <button onclick="appendValue('3')">3</button>
+        <button class="operator" onclick="appendValue('+')">+</button>
 
-      <button onclick="appendValue('0')">0</button>
-      <button onclick="appendValue('.')">.</button>
-      <button class="equal" onclick="calculate()">=</button>
-      <button onclick="backspace()">⌫</button>
+        <button onclick="appendValue('0')">0</button>
+        <button onclick="appendValue('.')">.</button>
+        <button class="equal" onclick="calculate()">=</button>
+        <button onclick="backspace()">⌫</button>
+      </div>
     </div>
   </div>
 
   <script>
-    let display = document.getElementById('display');
+    const display = document.getElementById('display');
 
     function appendValue(val) {
       if (display.innerText === '0') display.innerText = '';
@@ -119,10 +158,39 @@
     function calculate() {
       try {
         display.innerText = eval(display.innerText);
-      } catch (e) {
+      } catch {
         display.innerText = 'Error';
       }
     }
+
+    // 360° Rotation Script
+    const calculator = document.getElementById('calculator');
+    let isDragging = false;
+    let startX, startY;
+    let currentX = 0;
+    let currentY = 0;
+
+    calculator.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        const deltaX = e.clientX - startX;
+        const deltaY = e.clientY - startY;
+        currentX += deltaX * 0.5;
+        currentY -= deltaY * 0.5;
+        calculator.style.transform = `rotateY(${currentX}deg) rotateX(${currentY}deg)`;
+        startX = e.clientX;
+        startY = e.clientY;
+      }
+    });
+
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
   </script>
 </body>
 </html>
